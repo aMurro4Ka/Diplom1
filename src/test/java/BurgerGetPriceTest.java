@@ -61,5 +61,5 @@ public class BurgerGetPriceTest {
 
         // Проверяем, что метод getPrice возвращает ожидаемую цену с учетом погрешности DELTA
         Assert.assertEquals(expectedPrice, burger.getPrice(), DELTA);
-    }
+    }//
 }

@@ -10,7 +10,7 @@ import praktikum.IngredientType;
 import java.util.List;
 
 
-
+//
 @RunWith(Parameterized.class)
 public class BurgerGetReceiptTest {
     private final Bun bun;  // Текущая булочка для теста
