@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class BunTest {
-//
+
     private final String name;
     private final float price;
     private static final float DELTA = 0.01f;

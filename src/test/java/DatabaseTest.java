@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.Database;
 
-//
+
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseTest {
     //Объявление переменной database типа Database

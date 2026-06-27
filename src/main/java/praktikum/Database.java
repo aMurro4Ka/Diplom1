@@ -3,7 +3,6 @@ package praktikum;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Database {
 
     private final List<Bun> buns = new ArrayList<>();
