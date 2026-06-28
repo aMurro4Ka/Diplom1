@@ -13,6 +13,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
 @RunWith(Parameterized.class)
 public class BurgerGetReceiptTest {
     private final Bun bun;

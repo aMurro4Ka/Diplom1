@@ -41,84 +41,118 @@ public class BurgerTest {
         Assert.assertTrue(burger.ingredients.contains(ingredient));
     }
 
-    //  Тесты для метода removeIngredient
+    // Тесты для метода removeIngredient
     @Test
     public void testRemoveIngredientShouldDecreaseSize() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
 
-        burger.removeIngredient(0);
+        final int INDEX_TO_REMOVE = 0;
+        final int EXPECTED_SIZE = 1;
 
-        Assert.assertEquals(1, burger.ingredients.size());
+        burger.removeIngredient(INDEX_TO_REMOVE);
+
+        Assert.assertEquals(EXPECTED_SIZE, burger.ingredients.size());
     }
 
     @Test
     public void testRemoveIngredientShouldRemoveCorrectElement() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
 
-        burger.removeIngredient(0);
+        final int INDEX_TO_REMOVE = 0;
 
-        Assert.assertFalse(burger.ingredients.contains(ingredient1));
+        burger.removeIngredient(INDEX_TO_REMOVE);
+
+        Assert.assertFalse(burger.ingredients.contains(firstIngredient));
     }
 
     @Test
     public void testRemoveIngredientShouldKeepOtherElements() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
 
-        burger.removeIngredient(0);
+        final int INDEX_TO_REMOVE = 0;
 
-        Assert.assertTrue(burger.ingredients.contains(ingredient2));
+        burger.removeIngredient(INDEX_TO_REMOVE);
+
+        Assert.assertTrue(burger.ingredients.contains(secondIngredient));
     }
 
     // Тесты для метода moveIngredient
     @Test
     public void testMoveIngredientShouldKeepSize() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        Ingredient ingredient3 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
-        burger.addIngredient(ingredient3);
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        Ingredient thirdIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
 
-        burger.moveIngredient(0, 2);
+        final int FROM_INDEX = 0;
+        final int TO_INDEX = 2;
+        final int EXPECTED_SIZE = 3;
 
-        Assert.assertEquals(3, burger.ingredients.size());
+        burger.moveIngredient(FROM_INDEX, TO_INDEX);
+
+        Assert.assertEquals(EXPECTED_SIZE, burger.ingredients.size());
     }
 
     @Test
     public void testMoveIngredientShouldMoveElementToCorrectPosition() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        Ingredient ingredient3 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
-        burger.addIngredient(ingredient3);
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        Ingredient thirdIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
 
-        burger.moveIngredient(0, 2);
+        final int FROM_INDEX = 0;
+        final int TO_INDEX = 2;
 
-        Assert.assertSame(ingredient1, burger.ingredients.get(2));
+        burger.moveIngredient(FROM_INDEX, TO_INDEX);
+
+        Assert.assertSame(firstIngredient, burger.ingredients.get(TO_INDEX));
+    }
+
+    // Разделяем тест с двумя проверками на два отдельных теста
+    @Test
+    public void testMoveIngredientShouldShiftSecondElementToFirst() {
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        Ingredient thirdIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
+
+        final int FROM_INDEX = 0;
+        final int TO_INDEX = 2;
+
+        burger.moveIngredient(FROM_INDEX, TO_INDEX);
+
+        Assert.assertSame(secondIngredient, burger.ingredients.get(0));
     }
 
     @Test
-    public void testMoveIngredientShouldShiftOtherElements() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        Ingredient ingredient3 = mock(Ingredient.class);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
-        burger.addIngredient(ingredient3);
+    public void testMoveIngredientShouldShiftThirdElementToSecond() {
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
+        Ingredient thirdIngredient = mock(Ingredient.class);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
 
-        burger.moveIngredient(0, 2);
+        final int FROM_INDEX = 0;
+        final int TO_INDEX = 2;
 
-        Assert.assertSame(ingredient2, burger.ingredients.get(0));
-        Assert.assertSame(ingredient3, burger.ingredients.get(1));
+        burger.moveIngredient(FROM_INDEX, TO_INDEX);
+
+        Assert.assertSame(thirdIngredient, burger.ingredients.get(1));
     }
 }
