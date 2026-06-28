@@ -7,53 +7,103 @@ import praktikum.Bun;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(Parameterized.class)
 public class BurgerGetReceiptTest {
-    private final Bun bun;  // Текущая булочка для теста
-    private final List<Ingredient> ingredients;  // Список ингредиентов для теста
-    private final String expectedReceipt;  // Ожидаемый результат (чек) для теста
+    private final Bun bun;
+    private final List<Ingredient> ingredients;
+    private final String expectedReceipt;
 
-    // Конструктор для инициализации полей
     public BurgerGetReceiptTest(Bun bun, List<Ingredient> ingredients, String expectedReceipt) {
         this.bun = bun;
         this.ingredients = ingredients;
         this.expectedReceipt = expectedReceipt;
     }
 
-    // Метод, который будет возвращать данные для параметризованных тестов
     @Parameterized.Parameters
     public static Object[][] testData() {
+        // Создаем моки для булок
+        Bun blackBun = mock(Bun.class);
+        when(blackBun.getName()).thenReturn("black bun");
+        when(blackBun.getPrice()).thenReturn(100f);
+
+        Bun whiteBun = mock(Bun.class);
+        when(whiteBun.getName()).thenReturn("white bun");
+        when(whiteBun.getPrice()).thenReturn(1f);
+
+        Bun redBun = mock(Bun.class);
+        when(redBun.getName()).thenReturn("red bun");
+        when(redBun.getPrice()).thenReturn(1f);
+
+        // Создаем моки для ингредиентов (первый набор)
+        Ingredient sourCream = mock(Ingredient.class);
+        when(sourCream.getType()).thenReturn(IngredientType.SAUCE);
+        when(sourCream.getName()).thenReturn("sour cream");
+        when(sourCream.getPrice()).thenReturn(200f);
+
+        Ingredient cutlet1 = mock(Ingredient.class);
+        when(cutlet1.getType()).thenReturn(IngredientType.FILLING);
+        when(cutlet1.getName()).thenReturn("cutlet");
+        when(cutlet1.getPrice()).thenReturn(100f);
+
+        Ingredient dinosaur1 = mock(Ingredient.class);
+        when(dinosaur1.getType()).thenReturn(IngredientType.FILLING);
+        when(dinosaur1.getName()).thenReturn("dinosaur");
+        when(dinosaur1.getPrice()).thenReturn(200f);
+
+        // Создаем моки для ингредиентов (второй набор)
+        Ingredient cutlet2 = mock(Ingredient.class);
+        when(cutlet2.getType()).thenReturn(IngredientType.FILLING);
+        when(cutlet2.getName()).thenReturn("cutlet");
+        when(cutlet2.getPrice()).thenReturn(0.5f);
+
+        Ingredient chiliSauce = mock(Ingredient.class);
+        when(chiliSauce.getType()).thenReturn(IngredientType.SAUCE);
+        when(chiliSauce.getName()).thenReturn("chili sauce");
+        when(chiliSauce.getPrice()).thenReturn(4f);
+
+        Ingredient sausage1 = mock(Ingredient.class);
+        when(sausage1.getType()).thenReturn(IngredientType.FILLING);
+        when(sausage1.getName()).thenReturn("sausage");
+        when(sausage1.getPrice()).thenReturn(1f);
+
+        // Создаем моки для ингредиентов (третий набор)
+        Ingredient hotSauce = mock(Ingredient.class);
+        when(hotSauce.getType()).thenReturn(IngredientType.SAUCE);
+        when(hotSauce.getName()).thenReturn("hot sauce");
+        when(hotSauce.getPrice()).thenReturn(5.5f);
+
+        Ingredient sausage2 = mock(Ingredient.class);
+        when(sausage2.getType()).thenReturn(IngredientType.FILLING);
+        when(sausage2.getName()).thenReturn("sausage");
+        when(sausage2.getPrice()).thenReturn(14.5f);
+
+        Ingredient dinosaur2 = mock(Ingredient.class);
+        when(dinosaur2.getType()).thenReturn(IngredientType.FILLING);
+        when(dinosaur2.getName()).thenReturn("dinosaur");
+        when(dinosaur2.getPrice()).thenReturn(200f);
+
         return new Object[][]{
                 {
-                        // Тестовые данные для бургера с черной булочкой и несколькими ингредиентами
-                        new Bun("black bun", 100f), // Создание объекта Bun с именем "black bun" и ценой 100
-                        List.of( // Создание списка ингредиентов для бургера
-                                new Ingredient(IngredientType.SAUCE, "sour cream", 200f), // Ингредиент "sour cream" типа "SAUCE" с ценой 200
-                                new Ingredient(IngredientType.FILLING, "cutlet", 100f), // Ингредиент "cutlet" типа "FILLING" с ценой 100
-                                new Ingredient(IngredientType.FILLING, "dinosaur", 200f) // Ингредиент "dinosaur" типа "FILLING" с ценой 200
-                        ),
-                        // Ожидаемый чек для данного набора тестовых данных
-                        "(==== black bun ====)" + System.lineSeparator() + // Заголовок бургера
-                                "= sauce sour cream =" + System.lineSeparator() + // Ингредиент "sour cream"
-                                "= filling cutlet =" + System.lineSeparator() + // Ингредиент "cutlet"
-                                "= filling dinosaur =" + System.lineSeparator() + // Ингредиент "dinosaur"
-                                "(==== black bun ====)" + System.lineSeparator() + // Заголовок бургера
-                                System.lineSeparator() + // Пустая строка
-                                "Price: 700,000000" + System.lineSeparator() // Цена бургера
+                        blackBun,
+                        Arrays.asList(sourCream, cutlet1, dinosaur1),
+                        "(==== black bun ====)" + System.lineSeparator() +
+                                "= sauce sour cream =" + System.lineSeparator() +
+                                "= filling cutlet =" + System.lineSeparator() +
+                                "= filling dinosaur =" + System.lineSeparator() +
+                                "(==== black bun ====)" + System.lineSeparator() +
+                                System.lineSeparator() +
+                                "Price: 700,000000" + System.lineSeparator()
                 },
                 {
-                        // Тестовые данные для бургера с белой булочкой и несколькими ингредиентами
-                        new Bun("white bun", 1f),
-                        List.of(
-                                new Ingredient(IngredientType.FILLING, "cutlet", 0.5f),
-                                new Ingredient(IngredientType.SAUCE, "chili sauce", 4f),
-                                new Ingredient(IngredientType.FILLING, "sausage", 1f)
-                        ),
-                        // Ожидаемый чек
+                        whiteBun,
+                        Arrays.asList(cutlet2, chiliSauce, sausage1),
                         "(==== white bun ====)" + System.lineSeparator() +
                                 "= filling cutlet =" + System.lineSeparator() +
                                 "= sauce chili sauce =" + System.lineSeparator() +
@@ -63,14 +113,8 @@ public class BurgerGetReceiptTest {
                                 "Price: 7,500000" + System.lineSeparator()
                 },
                 {
-                        // Тестовые данные для бургера с красной булочкой и несколькими ингредиентами
-                        new Bun("red bun", 1f),
-                        List.of(
-                                new Ingredient(IngredientType.SAUCE, "hot sauce", 5.5f),
-                                new Ingredient(IngredientType.FILLING, "sausage", 14.5f),
-                                new Ingredient(IngredientType.FILLING, "dinosaur", 200f)
-                        ),
-                        // Ожидаемый чек
+                        redBun,
+                        Arrays.asList(hotSauce, sausage2, dinosaur2),
                         "(==== red bun ====)" + System.lineSeparator() +
                                 "= sauce hot sauce =" + System.lineSeparator() +
                                 "= filling sausage =" + System.lineSeparator() +
@@ -82,20 +126,13 @@ public class BurgerGetReceiptTest {
         };
     }
 
-    // Тестовый метод для проверки генерации чека
     @Test
     public void testGetReceipt() {
-        // Создание объекта Burger
         Burger burger = new Burger();
-        // Установка текущей булочки для бургера
         burger.setBuns(bun);
-        // Добавление ингредиентов в бургер
         ingredients.forEach(burger::addIngredient);
 
-        // Вызов метода getReceipt для получения чека
         String receipt = burger.getReceipt();
-
-        // Проверка, что полученный чек соответствует ожидаемому результату
         Assert.assertEquals(expectedReceipt, receipt);
     }
 }

@@ -12,6 +12,7 @@ import java.util.Collection;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
 @RunWith(Parameterized.class)
 public class BurgerGetPriceTest {
 
@@ -36,16 +37,17 @@ public class BurgerGetPriceTest {
         when(bun.getPrice()).thenReturn(1.0f);
 
         // Создаем заглушки для ингредиентов с заданными ценами
-        Ingredient ingredient1 = mock(Ingredient.class);
-        when(ingredient1.getPrice()).thenReturn(0.5f);
-        Ingredient ingredient2 = mock(Ingredient.class);
-        when(ingredient2.getPrice()).thenReturn(0.8f);
+        Ingredient sauceIngredient = mock(Ingredient.class);
+        when(sauceIngredient.getPrice()).thenReturn(0.5f);
+
+        Ingredient fillingIngredient = mock(Ingredient.class);
+        when(fillingIngredient.getPrice()).thenReturn(0.8f);
 
         // Возвращаем коллекцию параметров для теста
         return Arrays.asList(new Object[][] {
                 {bun, new Ingredient[]{}, 2.0f},  // Бургер без ингредиентов
-                {bun, new Ingredient[]{ingredient1}, 2.5f},  // Бургер с одним ингредиентом
-                {bun, new Ingredient[]{ingredient1, ingredient2}, 3.3f}  // Бургер с двумя ингредиентами
+                {bun, new Ingredient[]{sauceIngredient}, 2.5f},  // Бургер с одним ингредиентом (соус)
+                {bun, new Ingredient[]{sauceIngredient, fillingIngredient}, 3.3f}  // Бургер с двумя ингредиентами (соус и начинка)
         });
     }
 

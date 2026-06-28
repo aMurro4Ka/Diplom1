@@ -9,6 +9,7 @@ import praktikum.IngredientType;
 import java.util.Arrays;
 import java.util.Collection;
 
+
 @RunWith(Parameterized.class)
 public class IngredientTest {
 

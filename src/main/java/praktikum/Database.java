@@ -11,7 +11,7 @@ public class Database {
 
     public Database() {
         buns.add(new Bun("black bun", 100));
-        buns.add(new Bun("white bun", 200));
+        buns.add(new Bun("white bun", 200));//
         buns.add(new Bun("red bun", 300));
 
         ingredients.add(new Ingredient(IngredientType.SAUCE, "hot sauce", 100));

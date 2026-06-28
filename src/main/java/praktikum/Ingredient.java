@@ -15,7 +15,7 @@ public class Ingredient {
 
     public float getPrice() {
         return price;
-    }
+    }//
 
     public String getName() {
         return name;
